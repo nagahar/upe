@@ -1,0 +1,24 @@
+wordfreq
+awk '{
+	for(i=1;i<=NF;i++) 
+	if($i!~/\...*/) num[$i]++
+}
+END {for(word in num) print word, num[word]}
+' $*
+
+case-ignore version
+tr A-Z a-z <$* |wordfreq |sort -k2nr
+
+awk version
+real	0m6.577s
+user	0m1.940s
+sys	0m4.630s
+
+開発は容易であり、速度も速い
+
+sed version
+real	0m10.262s
+user	0m4.660s
+sys	0m5.600s
+
+開発はまあまあ容易だが、速度は遅い

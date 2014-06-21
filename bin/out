@@ -1,0 +1,5 @@
+for i in $1/*
+do
+	cat $i || out $i
+	cat $i && bundle $i
+done

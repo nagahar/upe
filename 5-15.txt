@@ -1,0 +1,1 @@
+筝bash_profile申trap 'times; exit 1' 0

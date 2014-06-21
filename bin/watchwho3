@@ -1,0 +1,26 @@
+PATH=/bin:/usr/bin
+old=/tmp/wwho.$$
+>$old
+
+while :
+do
+	new=`who`
+	echo $new | awk '{
+		for (i=1;i<=NF;i++){
+			if(i%6==0)
+				printf "%s\n",$i
+			else
+				printf "%s ",$i
+		}
+	}' | diff $old -
+	echo $new | awk '{
+		for (i=1;i<=NF;i++){
+			if(i%6==0)
+				printf "%s\n",$i
+			else
+				printf "%s ",$i
+		}
+	}' > $old
+	sleep 60
+done | awk '/>/ { $1="in:	"; print }
+			/</ { $1="out:	"; print }'

@@ -1,0 +1,7 @@
+$wc temp >temp
+
+シェルによってwcの実行前に>tempが評価され、tempが新規作成されるため
+
+$woh >temp
+
+シェルによってtempは新規作成されるが、wohは実行されない

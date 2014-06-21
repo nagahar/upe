@@ -1,0 +1,5 @@
+newer
+ls -tr | sed  '1,/^'$1'$/d'
+
+older
+ls -t | sed '1,/^'$1'$/d'

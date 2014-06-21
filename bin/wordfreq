@@ -1,0 +1,6 @@
+awk '{
+	for(i=1;i<=NF;i++) 
+	if($i!~/\...*/) num[$i]++
+}
+END {for(word in num) print word, num[word]}
+' $*

@@ -1,0 +1,5 @@
+awk '{print}' poem
+awk '{print $0}' poem
+awk '{printf "%s\n",$0}' poem
+
+一番上のコマンドが一番短い

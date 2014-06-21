@@ -1,0 +1,10 @@
+hoge=`who`
+aaa=`echo $hoge | awk '{
+	for (i=1;i<=NF;i++){
+		if(i%6==0)
+			printf "%s\n",$i
+		else
+			printf "%s ",$i
+	}
+}'`
+echo $aaa

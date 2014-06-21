@@ -1,0 +1,2 @@
+time ./loop trwordfreq ../poem > /dev/null
+time ./loop wordf ../poem > /dev/null

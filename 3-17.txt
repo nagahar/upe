@@ -1,0 +1,11 @@
+$out bin >junk 2>/dev/null
+
+上記のようにoutを実行すればよい
+シェルファイルoutの中身は下記になる
+
+
+for i in $1/*
+do
+	cat $i || out $i
+	cat $i && bundle $i
+done

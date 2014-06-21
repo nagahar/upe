@@ -1,0 +1,6 @@
+$grep -i '^\(.\)\(.\)\2\1$' /usr/share/dict/words
+boob
+deed
+noon
+peep
+sees

@@ -1,0 +1,7 @@
+cat $* |
+tr A-Z a-z | 
+tr -sc a-z '\012' | 
+sort -u > /tmp/inputwords
+grep -iw -f /tmp/inputwords /usr/share/dict/words >/tmp/outputwords
+grep -wv -f /tmp/outputwords /tmp/inputwords  
+rm -f /tmp/inputwords /tmp/outputwords

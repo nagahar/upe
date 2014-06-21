@@ -1,0 +1,13 @@
+#bundle
+
+for i
+do 
+	echo "echo $i 1>&2"
+	echo "echo \#`ls -l $i` >test$i"
+	echo "cat >>test$i <<'End of $i'"
+	sed "s/End of $i/'End of $i'/g" $i
+#	cat $i
+	echo "End of $i"
+	echo "sed \"s/'End of $i'/End of $i/g\" test$i >$i"
+	echo "rm -f test$i"
+done

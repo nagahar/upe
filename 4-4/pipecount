@@ -1,0 +1,11 @@
+#!/bin/sh
+
+a=0
+while [ $a -lt 100 ];
+do
+	cat ../poem |
+	tr -sc A-Za-z '\012' |
+	sort |
+	uniq -c
+	a=`expr $a + 1`
+done

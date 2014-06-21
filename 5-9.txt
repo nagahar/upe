@@ -1,0 +1,7 @@
+which true
+/bin/true
+-rwxr-xr-x root root
+
+which false
+/bin/false
+-rwxr-xr-x root root

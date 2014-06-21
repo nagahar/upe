@@ -1,0 +1,13 @@
+$echo "(file /bin/*;file /usr/bin/*) |grep 'shell script' |wc -l">sc
+$chmod +x sc
+$mv sc ../bin
+
+scではシェルスクリプトの数は100
+/binに含まれるシェルスクリプト数12
+/usr/binに含まれるシェルスクリプト数88
+
+$wc -c /bin/* |sort -nr -|tail -n 12 -
+
+一方/binに含まれるファイルのファイル長が短いファイル12を取り出して、
+シェルスクリプトかどうかを調査したところ10/12のファイルがシェルスクリプトであった
+

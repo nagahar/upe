@@ -1,0 +1,11 @@
+$file `grep -l bash *`
+1-1.txt:  ASCII text
+1-2.txt:  ISO-8859 text
+3-11.txt: ISO-8859 text
+
+$wc -l `grep -l bash *`
+      1 1-1.txt
+     13 1-2.txt
+     10 3-11.txt
+     24 total
+

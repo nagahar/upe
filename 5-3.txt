@@ -1,0 +1,75 @@
+翌年分も出力する
+calの使用目的としては、日々の予定管理に使われるため翌々年以降を表示する機能があっても使われることはない。そのため実装は現状で十分である。
+
+case $# in
+0)	set `date`;m=$2;y=$6;;
+1)	m=$1;set `date`;y=$6;;
+2)	m=$1;y=$2;;
+3)
+	case $2 in
+	[A-Za-z]*)
+		for i in $*
+		do
+			bash $0 $i
+		done
+		;;
+	-)
+		m=$1;last=$3
+		set `date`;y=$6
+
+		case $last in
+		$m)	last="";;
+		$((m-12)))	m=$((m-12));last="";;
+		[1-9]|10|11|12)	;;
+		jan*|Jan*)	last=1;;
+		feb*|Feb*)	last=2;;
+		mar*|Mar*)	last=3;;
+		apr*|Apr*)	last=4;;
+		may*|May*)	last=5;;
+		jun*|Jun*)	last=6;;
+		jul*|Jul*)	last=7;;
+		aug*|Aug*)	last=8;;
+		sep*|Sep*)	last=9;;
+		oct*|Oct*)	last=10;;
+		nov*|Nov*)	last=11;;
+		dec*|Dec*)	last=12;;
+		esac
+		;;
+	esac
+	;;
+*)
+	for i in $*
+	do
+		bash $0 $i
+	done
+	;;
+esac
+
+case $m in
+jan*|Jan*)	m=1;;
+feb*|Feb*)	m=2;;
+mar*|Mar*)	m=3;;
+apr*|Apr*)	m=4;;
+may*|May*)	m=5;;
+jun*|Jun*)	m=6;;
+jul*|Jul*)	m=7;;
+aug*|Aug*)	m=8;;
+sep*|Sep*)	m=9;;
+oct*|Oct*)	m=10;;
+nov*|Nov*)	m=11;;
+dec*|Dec*)	m=12;;
+[1-9]|10|11|12)	;;
+13|14|15|16|17|18|19|20|21|22|23) y=$((y+1));;
+*)	y=$m;m="";;
+esac
+
+case $last in
+[1-9]|[1-2][0-9])
+	case $m in
+	13|14|15|16|17|18|19|20|21|22|23) /usr/bin/cal $((m-12)) $y;;
+	*) /usr/bin/cal $m $y;;
+	esac
+	bash $0 $((m+1)) - $last
+	;;
+*)	/usr/bin/cal $m $y;;
+esac

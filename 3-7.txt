@@ -1,0 +1,14 @@
+$cat x y >y
+(予想)元のyの内容が破棄され、新規のyにxの内容が入力される
+
+(実際)
+cat: y: input file is output file
+
+$cat x>>x
+(予想)元のxの内容と同一の内容がxに入力される
+
+(実際)
+cat: x: input file is output file
+
+(結論)
+catは入出力のとinode番号とデバイスIDを比較し、両者が同一の場合エラー出力し、入力ファイルを無視する

@@ -1,0 +1,31 @@
+opath=$PATH
+PATH=/bin:/usr/bin
+
+case $# in
+0)	echo 'Usage: which command' 1>&2; exit 2
+esac
+
+case $1 in
+-a)	match=$2;;
+*)	match=$1;;
+esac
+
+ex=1
+for i in `echo $opath | sed 's/^:/.:/
+							s/::/:.:/g
+							s/:$/:./
+							s/:/ /g'`
+do
+	if test -x $i/$match
+	then
+		echo $i/$match
+		if test "$1" = '-a'
+		then
+			ex=0
+		else
+			exit 0
+		fi
+	fi
+done
+
+exit $ex

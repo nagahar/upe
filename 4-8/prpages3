@@ -1,0 +1,3 @@
+sed -n '$=' $* |
+awk '{n+=int(($1+55)/56)}
+    END         {print n}'

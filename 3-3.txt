@@ -1,0 +1,122 @@
+$grep $ 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep6:grep \\
+3-3/grep7:grep \\\\
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+3-3/test:test
+1.行末の空文字列にマッチしているファイルが表示される
+
+$grep \$ 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep6:grep \\
+3-3/grep7:grep \\\\
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+3-3/test:test
+1.シェルによってgrepには$が引数として渡される
+2.行末の空文字列にマッチしているファイルが表示される
+
+$grep \\$ 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+1.シェルによってgrepには\$が引数として渡される
+2.エスケープ(\)によってメタキャラクタの意味が失われ、$にマッチしているファイルが表示される
+
+$grep \\\$ 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+1.シェルによってgrepには\$が引数として渡される
+2.エスケープ(\)によってメタキャラクタの意味が失われ、$にマッチしているファイルが表示される
+
+$grep '\$' 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+1.シェルによってgrepには\$が引数として渡される
+2.エスケープ(\)によってメタキャラクタの意味が失われ、$にマッチしているファイルが表示される
+
+$grep '\'$' 3-3/*
+>
+1.単一引用符(')が閉じていない
+
+$grep \\ 3-3/*
+grep: バックスラッシュが残っています
+1.バックスラッシュだけではマッチしない
+
+$grep \\\\ 3-3/*
+3-3/grep1:grep \$
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep6:grep \\
+3-3/grep7:grep \\\\
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+1.シェルによってgrepには\\が引数として渡される
+2.エスケープ(\)によってメタキャラクタの意味が失われ、\にマッチしているファイルが表示される
+
+$grep "\$" 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep6:grep \\
+3-3/grep7:grep \\\\
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+3-3/test:test
+1.シェルによって二重引用符(")が解釈され、\$のエスケープ文字(\)が削られる
+2.シェルによってgrepには$が引数として渡される
+3.行末の空文字列にマッチしているファイルが表示される
+
+$grep '"$' 3-3/*
+3-3/grep10:grep "$"
+3-3/grep8:grep "\$"
+1.シェルによってgrepには"$が引数として渡される
+2.行末の二重引用符(")にマッチしているファイルが表示される
+
+$grep "$" 3-3/*
+3-3/grep1:grep \$
+3-3/grep10:grep "$"
+3-3/grep2:grep \\$
+3-3/grep3:grep \\\$
+3-3/grep4:grep '\$'
+3-3/grep5:grep '\'$'
+3-3/grep6:grep \\
+3-3/grep7:grep \\\\
+3-3/grep8:grep "\$"
+3-3/grep9:grep '\"$'
+3-3/test:test
+1.シェルによってgrepには$が引数として渡される
+2.行末の空文字列にマッチしているファイルが表示される

@@ -1,0 +1,6 @@
+$touch test
+$chmod 007 test
+$cat test
+cat: test: 許可がありません
+$date >test
+test: 許可がありません

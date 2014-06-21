@@ -1,0 +1,14 @@
+PATH=/bin:/usr/bin
+new=/tmp/wwho1.$$
+old=/tmp/wwho2.$$
+>$old
+
+while :
+do
+	who >$new
+	comm $old $new
+	mv $new $old
+	sleep 60
+done | awk 'BEGIN{FS="\t"}
+		$2!=""{printf "in:	%s\n",$2 }
+		$1!=""{printf "out:	%s\n",$1 }'

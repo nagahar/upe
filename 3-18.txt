@@ -1,0 +1,10 @@
+bundleを下記のように修正すればよい
+
+for i
+do 
+	echo "echo $i 1>&2"
+	echo "echo \#`ls -l $i` >$i"
+	echo "cat >>$i <<'End of $i'"
+	cat $i
+	echo "End of $i"
+done

@@ -1,0 +1,20 @@
+wc $* |
+awk '!/ total$/ {n+=int(($1+55)/56)}
+    END         {print n}'
+real	0m7.223s
+user	0m3.610s
+sys	0m3.570s
+
+awk 'END {print NR}' $* |
+awk '{n+=int(($1+55)/56)} 
+    END {print n}'
+real	0m10.570s
+user	0m6.540s
+sys	0m3.780s
+
+sed -n '$=' $* |
+awk '{n+=int(($1+55)/56)}
+    END         {print n}'
+real	1m4.998s
+user	1m0.590s
+sys	0m4.290s

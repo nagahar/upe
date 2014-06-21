@@ -1,0 +1,6 @@
+$mv junk junk1
+junk1のiノードはjunkと同じ
+
+$cp junk junk1
+$rm junk1
+junk1のiノードはjunkと異なる

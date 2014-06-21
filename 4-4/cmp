@@ -1,0 +1,3 @@
+#!/bin/sh
+time ./ccheck > /dev/null
+time ./pipecheck > /dev/null

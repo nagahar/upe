@@ -1,0 +1,14 @@
+cat $* |
+tr A-Z a-z | 
+tr -sc a-z '\012' | 
+sort -u > /tmp/inputwords
+grep -iw -f inputwords /usr/share/dict/words >/tmp/outputwords
+grep -wv -f /tmp/outputwords /tmp/inputwords  
+
+上記のようなスクリプトでスペルチェックが実行できる
+
+欠点:
+速度が遅い
+
+対処：
+インタープリタ言語ではなく、他のコンパイル言語を使用する

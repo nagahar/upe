@@ -1,0 +1,2 @@
+/bin/rm -fr /tmp/tmp/
+echo remove | at 5am

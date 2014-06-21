@@ -1,0 +1,39 @@
+awk <$HOME/calendar '
+BEGIN{
+	x[0]="Jan 31 Feb 28 Mar 31 Apr 30 May 31 Jun 30"\
+	   "Jul 31 Aug 31 Sep 30 Oct 31 Nov 30 Dec 31 Jan 31"
+	x[1]="Jan 31 Feb 29 Mar 31 Apr 30 May 31 Jun 30"\
+	   "Jul 31 Aug 31 Sep 30 Oct 31 Nov 30 Dec 31 Jan 31"
+	split("'"`date`"'",date)
+	year=date[6];mon1=date[2];day1=date[3];week=date[1]
+	leap= year%4==0 && year%100==0 || year%400==0
+	split(x[leap],data)
+	for(i=1;i<24;i+=2){
+		days[data[i]]=data[i+1]
+		nextmon[data[i]]=data[i+2]
+	}
+	mon2=mon1;day2=day1+1
+	if(day1>=days[mon1]){
+		day2=1
+		mon2=nextmon[mon1]
+	}
+	if(week=="Fri"){
+		mon3=mon2;day3=day2+1
+		if(day2>=days[mon2]){
+			day3=1
+			mon3=nextmon[mon2]
+		}
+		mon4=mon3;day4=day3+1
+		if(day3>=days[mon3]){
+			day4=1
+			mon4=nextmon[mon3]
+		}
+	}
+}
+$1 == mon1 && $2 == day1 || $1 == mon2 && $2 == day2 
+week=="Fri" && ($1==mon3 && $2==day3 || $1==mon4 && $2==day4)
+'   
+
+休暇期間をcalendarに伝える方法
+1．休暇期間データをawkから読み込む
+2．"明日"、または"週末"が休暇期間であり、入力データが該当休暇期間であれば、データを表示する

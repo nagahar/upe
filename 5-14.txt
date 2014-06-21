@@ -1,0 +1,11 @@
+標準出力と標準エラー出力が同一では出力確認の閲覧性が悪い。
+下記のようにする。
+
+trap "" 1 15
+if test -t 2>&1
+then
+	echo "Sending output to 'nohup.out'"
+	exec nice -5 $* >>nohup.out 2>>nohup.err
+else
+	exec nice -5 $*
+fi

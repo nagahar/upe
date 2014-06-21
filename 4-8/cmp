@@ -1,0 +1,4 @@
+#!/bin/sh
+time ./loop prpages /usr/share/dict/words > /dev/null
+time ./loop prpages2 /usr/share/dict/words > /dev/null
+time ./loop prpages3 /usr/share/dict/words > /dev/null

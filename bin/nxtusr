@@ -1,0 +1,16 @@
+sort -t : -k3,3n /etc/passwd | awk 'BEGIN{
+	FS=":"
+	val=0
+}
+{
+	if(val==65535){
+		print "UID is full!"
+		exit 0
+	}else if(val==$3){
+		val+=1
+		next
+	}else{
+		printf "UID %d is available\n",val
+		exit 0
+	}
+}'

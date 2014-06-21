@@ -1,0 +1,7 @@
+オリジナルrm
+mkdir /tmp/tmp 2>/dev/null
+cp $* /tmp/tmp/
+
+at入力ファイルremove
+/bin/rm -fr /tmp/tmp/
+echo remove | at 5am

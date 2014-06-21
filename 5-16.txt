@@ -1,0 +1,17 @@
+#!/bin/bash
+awk ' BEGIN { FS=":"
+		count=0
+		init=0 }
+	/^[a-zA-Z]/{
+	  print $1
+	  if(count==0){
+		init=$3
+		count+=1
+	  }else{
+		print init,count
+		if($3>init+count){
+			printf "%d is available\n",init+count
+			exit
+		}
+	  }
+	} ' /etc/passwd

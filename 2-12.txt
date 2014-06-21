@@ -1,0 +1,4 @@
+$write user
+
+1.userと同一のut_userからuserのutmp構造体を特定し、ut_lineを取得する
+2.ut_lineで特定されるttyデバイスとメッセージを入出力する

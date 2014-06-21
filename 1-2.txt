@@ -1,0 +1,13 @@
+#に1文字削除ではないため、\はシェルが解釈する
+そのため下記のごとくなる
+
+date
+2005年 12月 12日 月曜日 23:25:57 JST
+
+#date
+
+\#date
+-bash: #date: command not found
+
+\\#date
+-bash: \#date: command not found
