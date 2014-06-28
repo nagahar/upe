@@ -76,7 +76,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "hoc.y"
+//#line 1 "hoc.y"
 
 #define	YYSTYPE double
 
@@ -112,7 +112,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 116 "y.tab.c"
+//#line 116 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -1305,43 +1305,43 @@ yyreduce:
   switch (yyn)
     {
         case 4:
-#line 10 "hoc.y"
+//#line 10 "hoc.y"
     { printf("\t%.8g\n", (yyvsp[(2) - (3)])); }
     break;
 
   case 5:
-#line 11 "hoc.y"
+//#line 11 "hoc.y"
     { (yyval) = (yyvsp[(1) - (1)]); }
     break;
 
   case 6:
-#line 12 "hoc.y"
+//#line 12 "hoc.y"
     { (yyval) = (yyvsp[(1) - (3)]) + (yyvsp[(3) - (3)]); }
     break;
 
   case 7:
-#line 13 "hoc.y"
+//#line 13 "hoc.y"
     { (yyval) = (yyvsp[(1) - (3)]) - (yyvsp[(3) - (3)]); }
     break;
 
   case 8:
-#line 14 "hoc.y"
+//#line 14 "hoc.y"
     { (yyval) = (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]); }
     break;
 
   case 9:
-#line 15 "hoc.y"
+//#line 15 "hoc.y"
     { (yyval) = (yyvsp[(1) - (3)]) / (yyvsp[(3) - (3)]); }
     break;
 
   case 10:
-#line 16 "hoc.y"
+//#line 16 "hoc.y"
     { (yyval) = (yyvsp[(2) - (3)]); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1345 "y.tab.c"
+//#line 1345 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1555,7 +1555,7 @@ yyreturn:
 }
 
 
-#line 17 "hoc.y"
+//#line 17 "hoc.y"
  /* 文法規則の終了 */
 #include <stdio.h>
 #include <ctype.h>
@@ -1611,4 +1611,3 @@ int warning(const char *s, const char *t)
 	fprintf(stderr, " near line %d\n", lineno);
 	return 0;
 }
-
