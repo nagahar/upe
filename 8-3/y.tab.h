@@ -67,7 +67,7 @@ typedef union YYSTYPE
 	double	val;	/* 値の場合 */
 	Symbol	*sym;	/* Symbolテーブルのポインタの場合 */
 	double	*vals;
-	char	*strings
+	char	**strs;
 }
 /* Line 1529 of yacc.c.  */
 #line 74 "y.tab.h"

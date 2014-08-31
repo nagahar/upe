@@ -1,0 +1,25 @@
+#!/bin/zsh
+# news: print news files, final version
+
+HOME=.	# debugging only
+cd .	#place holder for /usr/news
+IFS='
+'
+
+for i in `ls -t * $HOME/.news_time 2>&1`
+do
+	IFS=' '
+	case $i in
+	*' No such file or directory')	;;
+	*/.news_time)	break ;;
+	*)	set X`ls -l $i`
+		echo news:
+		echo "
+		$i: ($3) $6 $7 $8
+		"
+		cat $i
+	esac
+done
+
+touch $HOME/.news_time
+

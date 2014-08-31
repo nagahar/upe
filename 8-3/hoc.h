@@ -13,7 +13,7 @@ Symbol	*install(), *lookup();
 double *mkvlst(double a);
 double *addvlst(double *args, double a);
 
-int exec(const char *args);
-char *mknlst(char *a);
-char *addnlst(char *args, char *a);
+double exec(char **args);
+char **mknlst(char *a);
+char **addnlst(char **args, char *a);
 

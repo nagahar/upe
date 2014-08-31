@@ -6,13 +6,13 @@ extern double Pow();
 	double	val;	/* 値の場合 */
 	Symbol	*sym;	/* Symbolテーブルのポインタの場合 */
 	double	*vals;
-	char	*strings
+	char	**strs;
 }
 %token	<val>	NUMBER
 %token	<sym>	VAR BLTIN UNDEF CNST
 %type	<val>	expr asgn exec	/* 非終端記号はtypeでグループ化する */
-%type	<vals>	tple
-%type	<strings>	strs
+%type	<vals>	tpl
+%type	<strs>	stpl
 %right	'='
 %left	'+' '-' /* 左結合 */
 %left	'*' '/' '%'  /* より優先度の高い左結合 */
@@ -23,23 +23,23 @@ extern double Pow();
 list:	/* 空白も対象 */
 	| list '\n'
 	| list asgn '\n'
-	| list exec '\n' { printf("****%ld\n", $2); }
 	| list expr '\n' { printf("\t%.8g\n", $2); }
 	| list expr ';' { printf("\t%.8g\n", $2); }
+	| list exec '\n' { printf("\tdone!\n"); }
 	| list error '\n' { yyerrok; }
 	;
 asgn:	VAR '=' expr { $$ = $1->u.val = $3; $1->type = VAR; }
 	| CNST '=' expr { execerror("constant value", $1->name); }
 	;
-exec:	'!' strs { $$ = exec($2); }
+exec:	'!' stpl { $$ = exec($2); }
 	;
-strs:	
-	| VAR { $$ = $1->name; }
-	| strs ',' VAR { $$ = addnlst($1, $3->name); }
+stpl:	
+	| VAR { $$ = mknlst($1->name); }
+	| stpl ',' VAR { $$ = addnlst($1, $3->name); }
 	;
-tple:	
+tpl:	
 	| expr { $$ = mkvlst($1); }
-	| tple ',' expr { $$ = addvlst($1, $3); }
+	| tpl ',' expr { $$ = addvlst($1, $3); }
 	;
 expr:	NUMBER
 	| VAR { if ($1->type == UNDEF) {
@@ -48,7 +48,7 @@ expr:	NUMBER
 		$$ = $1->u.val; }
 	| CNST { $$ = $1->u.val; }
 	| asgn
-	| BLTIN '(' tple ')' { $$ = (*($1->u.ptr))($3); }
+	| BLTIN '(' tpl ')' { $$ = (*($1->u.ptr))($3); }
 	| '-' expr %prec UNARYMINUS { $$ = -$2; }
 	| '+' expr %prec UNARYPLUS { $$ = $2; }
 	| expr '%' expr { $$ = fmod($1, $3); }
@@ -77,7 +77,7 @@ char *progname;
 int lineno = 1;
 jmp_buf begin;
 static double vals[MAX_SIZE];
-static char strings[MAX_SIZE];
+static char *strings[MAX_SIZE];
 static int tail;
 
 int main(int argc, char *argv[])
@@ -97,10 +97,11 @@ double *addvlst(double *args, double a)
 	if (tail + 1 < MAX_SIZE) {
 		tail++;
 		args[tail] = a;
-		return args;
 	} else {
 		execerror("out of range argument", (char *)0);
 	}
+
+	return args;
 }
 
 
@@ -128,10 +129,10 @@ double *mkvlst(double a)
 }
 
 
-char *mknlst(char *a)
+char **mknlst(char *a)
 {
-	fprintf(stderr, "*******");
-	printf("%s", a);
+	fprintf(stderr, "!!!!!");
+	fprintf(stderr, "%s\n", a);
 	tail = 0;
 	strings[tail] = a;
 	strings[tail + 1] = NULL;
@@ -139,28 +140,35 @@ char *mknlst(char *a)
 }
 
 
-char *addnlst(char *args, char *a)
+char **addnlst(char **args, char *a)
 {
-	printf("%s", a);
+	fprintf(stderr, "@@@@%s\n", a);
 	if (tail + 1 < MAX_SIZE - 1) {
 		tail++;
 		args[tail] = a;
 		args[tail + 1] = NULL;
-		return args;
 	} else {
 		execerror("out of range argument", (char *)0);
 	}
 
+	return args;
 }
 
 
-int exec(const char *args)
+double exec(char **args)
 {
-	if (-1 == execvp(args[0], args)) {
-		perror("couldn't execute");
+	int status;
+	int w, pid;
+	if ((pid = fork()) == 0) {
+		if (-1 == execvp(args[0], args)) {
+			perror("couldn't execute");
+		}
 	}
 
-	return 0;
+	while ((w = wait(&status)) != pid && w != -1)
+		;
+
+	return 0.0;
 }
 
 

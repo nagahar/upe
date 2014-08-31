@@ -1,1 +1,3 @@
-筝bash_profile申trap 'times; exit 1' 0
+cat bash_profile
+
+trap 'times; exit 1' 0

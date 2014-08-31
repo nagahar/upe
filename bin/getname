@@ -1,1 +1,2 @@
+#!/bin/zsh
 who am i | sed 's/ .*//'
