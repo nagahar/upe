@@ -1,7 +1,7 @@
 #!/bin/zsh
 # get: extract file from history
 
-PATH=/bin:/usr/bin:./
+PATH=/bin:/usr/bin:./:./bin
 
 VERSION=0
 while test "$1" != ""

@@ -1,7 +1,7 @@
 #!/bin/zsh
 # replace:	replace str1 in files with str2, in place
 
-PATH=/bin:/usr/bin:./
+PATH=/bin:/usr/bin:./:./bin
 
 case $# in
 0|1|2) echo 'Usage: replace [-v] str1 str2 files' 1>&2; exit 1
